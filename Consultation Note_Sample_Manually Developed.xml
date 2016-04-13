@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><?xml-stylesheet type="text/xsl" href="CDA.xsl"?>
+
+<!-- This document is based on the sample CDA consultation note provided within the CCDAR2_IG package available from HL7 portal -->
+<!-- Sampling communication between PCC and ED --> 
+<!--
+  Title: US_Realm_Header_Template -->
+<ClinicalDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="urn:hl7-org:v3" xmlns:cda="urn:hl7-org:v3" xmlns:sdtc="urn:hl7-org:sdtc">
+	<!--
+********************************************************
+  CDA Header
+********************************************************
+  -->
+
+	<realmCode code="US"/>
+	<typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040"/>
+	<!-- US General Header Template -->
+	<templateId root="2.16.840.1.113883.10.20.22.1.1" extension="2014-06-09"/>
+	<!-- conforms to the document specific requirements i.e. Consultation Note -->
+	<templateId root="2.16.840.1.113883.10.20.22.1.4" extension="2014-06-09"/>
+	<id extension="TT988" root="2.16.840.1.113883.19.5.99999.1"/>
+	<!-- globally unique identifier for the document: used the sample numbers -->
+	<code codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" code="11488-4"
+		displayName="Consultation Note"/>
+	<!-- using preferred code not a specialized one -->
+	<title>Utah Poison Control Center: Consultation Note</title>
+	<effectiveTime value="201410161907-0600"/>
+	<!-- Adjusted to MDT: Mountain Daylight Time -->
+	<confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25"/>
+	<!-- can be adjusted according to:http://hl7.org/implement/standards/fhir/v3/Confidentiality/ -->
+	<languageCode code="en-US"/>
+	<!-- setId is "A report identifier that remains constant across all revisions that derive from a common original": used the sample numbers -->
+	<setId extension="sTT988" root="2.16.840.1.113883.19.5.99999.19"/>
+	<versionNumber value="1"/>
+	<!-- as it is the first version: increment by version number -->
+	<recordTarget>
+		<patientRole>
+			<id extension="MRN-11111" root="2.16.840.1.113883.4.1"/>
+			<!-- Fake ID, MRN may be used and/or other mean of case identification e.g. auto-generated per case and center identifiers -->
+			<addr use="HP">
+				<!-- HP is "primary home" from codeSystem 2.16.840.1.113883.5.1119 -->
+				<!-- others may be used according to the location reported e.g. work -->
+				<streetAddressLine>XXX Long Street</streetAddressLine>
+				<city>Good City</city>
+				<state>UT</state>
+				<postalCode>84XXX</postalCode>
+				<country>US</country>
+				<!-- US is "United States" from ISO 3166-1 Country Codes: 1.0.3166.1 -->
+			</addr>
+			<telecom value="tel:(XXX)XXX-XXXX" use="HP"/>
+			<!-- HP is "primary home" from HL7 AddressUse 2.16.840.1.113883.5.1119 -->
+			<patient>
+				<name use="L">
+					<!-- L is "Legal" from HL7 EntityNameUse 2.16.840.1.113883.5.45 -->
+					<given>Jane</given>
+					<family>Doe</family>
+				</name>
+				<administrativeGenderCode code="F" codeSystem="2.16.840.1.113883.5.1"
+					displayName="Female"/>
+				<birthTime value="19900101"/>
+				<maritalStatusCode code="M" displayName="Married" codeSystem="2.16.840.1.113883.5.2"
+					codeSystemName="MaritalStatusCode"/>
+				<raceCode nullFlavor="UNK"/>
+				<ethnicGroupCode code="2186-5" displayName="Not Hispanic or Latino"
+					codeSystem="2.16.840.1.113883.6.238" codeSystemName="Race &amp; Ethnicity - CDC"/>
+				<guardian>
+					<code code="SPS" displayName="Husband" codeSystem="2.16.840.1.113883.5.111"
+						codeSystemName="HL7 Role code"/>
+					<!-- code can be selected from: http://hl7.org/implement/standards/fhir/v3/RoleCode/ -->
+					<addr use="HP">
+						<!-- HP is "primary home" from codeSystem 2.16.840.1.113883.5.1119 -->
+						<!-- others may be used according to the location reported e.g. work -->
+						<streetAddressLine>XXX Long Street</streetAddressLine>
+						<city>Good City</city>
+						<state>UT</state>
+						<postalCode>84XXX</postalCode>
+						<country>US</country>
+						<!-- US is "United States" from ISO 3166-1 Country Codes: 1.0.3166.1 -->
+					</addr>
+					<telecom value="tel:(XXX)XXX-XXXX" use="HP"/>
+					<guardianPerson>
+						<name>
+							<given>John</given>
+							<family>Doe</family>
+						</name>
+					</guardianPerson>
+				</guardian>
+				<languageCommunication>
+					<languageCode code="en"/>
+					<modeCode code="ESP" displayName="Expressed spoken"
+						codeSystem="2.16.840.1.113883.5.60" codeSystemName="LanguageAbilityMode"/>
+					<proficiencyLevelCode code="G" displayName="Good"
+						codeSystem="2.16.840.1.113883.5.61"
+						codeSystemName="LanguageAbilityProficiency"/>
+					<preferenceInd value="true"/>
+				</languageCommunication>
+			</patient>
+			<providerOrganization>
+				<id nullFlavor="UNK" root="2.16.840.1.113883.4.6"/>
+				<!-- what is the ID for PCC -->
+				<name>Utah Poison Control Center</name>
+				<telecom use="WP" value="tel: (800) 222-1222"/>
+				<addr use="WP">
+					<streetAddressLine>30 2000 E</streetAddressLine>
+					<city>Salt Lake City</city>
+					<state>UT</state>
+					<postalCode>84112</postalCode>
+					<country>US</country>
+				</addr>
+			</providerOrganization>
+		</patientRole>
+	</recordTarget>
+	<author>
+		<time value="201410161907-0600"/>
+		<assignedAuthor>
+			<id extension="UPCC_CSPI_1" root="2.16.840.1.113883.4.6"/>
+			<!-- what are the identifiers used for SPIs? -->
+			<code code="183500000X" codeSystem="2.16.840.1.113883.6.101" displayName="Pharmacist"/>
+			<!-- for Registered Nurse use code="163W00000X"; available from: https://phinvads.cdc.gov/vads/ViewValueSet.action?id=9FD34BBC-617F-DD11-B38D-00188B398520 -->
+			<addr use="WP">
+				<streetAddressLine>30 2000 E</streetAddressLine>
+				<city>Salt Lake City</city>
+				<state>UT</state>
+				<postalCode>84112</postalCode>
+				<country>US</country>
+			</addr>
+			<telecom use="WP" value="tel: (800) 222-1222"/>
+			<assignedPerson>
+				<name>
+					<given>SPI_First_Name</given>
+					<family>SPI_Last_Name</family>
+				</name>
+			</assignedPerson>
+		</assignedAuthor>
+	</author>
+	<dataEnterer>
+		<assignedEntity>
+			<id root="2.16.840.1.113883.4.6" extension="999999943252"/>
+			<addr use="WP">
+				<streetAddressLine>30 2000 E</streetAddressLine>
+				<city>Salt Lake City</city>
+				<state>UT</state>
+				<postalCode>84112</postalCode>
+				<country>US</country>
+			</addr>
+			<telecom use="WP" value="tel: (800) 222-1222"/>
+			<assignedPerson>
+				<name>
+					<given>SPI_First_Name</given>
+					<family>SPI_Last_Name</family>
+				</name>
+			</assignedPerson>
+		</assignedEntity>
+	</dataEnterer>
+	<informant>
+		<assignedEntity>
+			<id nullFlavor="UNK" root="2.16.840.1.113883.4.6"/>
+			<!-- what are the identifiers used for SPIs? -->
+			<!-- Root through http://www.oid-info.com/, contact the responsible for UoU OID  -->
+			<addr use="WP">
+				<streetAddressLine>30 2000 E</streetAddressLine>
+				<city>Salt Lake City</city>
+				<state>UT</state>
+				<postalCode>84112</postalCode>
+				<country>US</country>
+			</addr>
+			<telecom use="WP" value="tel: (800) 222-1222"/>
+			<assignedPerson>
+				<name>
+					<given>SPI_First_Name</given>
+					<family>SPI_Last_Name</family>
+				</name>
+			</assignedPerson>
+		</assignedEntity>
+	</informant>
+	<informant>
+		<relatedEntity classCode="PRS">
+			<!-- classCode PRS represents a person with personal relationship with the patient. -->
+			<code code="SPS" displayName="SPOUSE" codeSystem="2.16.840.1.113883.1.11.19563"
+				codeSystemName="Personal Relationship Role Type Value Set"/>
+			<!-- available from: https://phinvads.cdc.gov/vads/ViewValueSet.action?id=68FDBFB5-A277-DE11-9B52-0015173D1785 -->
+			<addr nullFlavor="UNK"></addr>
+			<relatedPerson>
+				<name>
+					<given>John</given>
+					<family>Doe</family>
+				</name>
+			</relatedPerson>
+		</relatedEntity>
+	</informant>
+	<custodian>
+		<assignedCustodian>
+			<representedCustodianOrganization>
+				<id extension="99999999" root="2.16.840.1.113883.4.6"/>
+				<!-- what is the ID for PCC -->
+				<name>Utah Poison Control Center</name>
+				<telecom use="WP" value="tel: (800) 222-1222"/>
+				<addr use="WP">
+					<streetAddressLine>30 2000 E</streetAddressLine>
+					<city>Salt Lake City</city>
+					<state>UT</state>
+					<postalCode>84112</postalCode>
+					<country>US</country>
+				</addr>
+			</representedCustodianOrganization>
+		</assignedCustodian>
+	</custodian>
+	<informationRecipient>
+		<intendedRecipient>
+			<informationRecipient>
+				<!-- this is optional MAY -->
+				<name>
+					<given>Clinician_First_name</given>
+					<family>Clinician_Last_name</family>
+				</name>
+			</informationRecipient>
+			<receivedOrganization>
+				<name>Intermountain Healthcare Hospital</name>
+			</receivedOrganization>
+		</intendedRecipient>
+	</informationRecipient>
+	<legalAuthenticator>
+		<time value="201410161907-0600"/>
+		<signatureCode code="S"/>
+		<assignedEntity>
+			<id extension="99999999" root="2.16.840.1.113883.4.6"/>
+			<!-- what is the ID for PCC -->
+			<addr use="WP">
+				<streetAddressLine>30 2000 E</streetAddressLine>
+				<city>Salt Lake City</city>
+				<state>UT</state>
+				<postalCode>84112</postalCode>
+				<country>US</country>
+			</addr>
+			<telecom use="WP" value="tel: (800) 222-1222"/>
+			<!--<name>Utah Poison Control Center</name>-->
+			<assignedPerson>
+				<name>
+					<given>SPI_First_name</given>
+					<family>SPI_Last_name</family>
+				</name>
+			</assignedPerson>
+		</assignedEntity>
+	</legalAuthenticator>
+	<authenticator>
+		<time value="201410161907-0600"/>
+		<signatureCode code="S"/>
+		<assignedEntity>
+			<id extension="999999999" root="2.16.840.1.113883.4.6"/>
+			<addr use="WP">
+				<streetAddressLine>30 2000 E</streetAddressLine>
+				<city>Salt Lake City</city>
+				<state>UT</state>
+				<postalCode>84112</postalCode>
+				<country>US</country>
+			</addr>
+			<telecom use="WP" value="tel: (800) 222-1222"/>
+			<assignedPerson>
+				<name>
+					<given>SPI_First_name</given>
+					<family>SPI_Last_name</family>
+				</name>
+			</assignedPerson>
+		</assignedEntity>
+	</authenticator>
+	<inFulfillmentOf typeCode="FLFS">
+		<order classCode="ACT" moodCode="RQO">
+			<id root="2.16.840.1.113883.19" extension="12345-67890"/>
+		</order>
+	</inFulfillmentOf>
+	<componentOf>
+		<encompassingEncounter>
+			<id extension="9937012" root="2.16.840.1.113883.19"/>
+			<code codeSystem="2.16.840.1.113883.6.12" codeSystemName="CPT-4" code="99213"
+				displayName="Evaluation and Management"/>
+			<effectiveTime>
+				<!-- Adjusted to MDT: Mountain Daylight Time -->
+				<low value="201410161907-0600"/>
+				<high value="201410161907-0600"/>
+			</effectiveTime>
+			<location>
+				<healthCareFacility>
+					<!--PCC URI-->
+					<id root="2.16.540.1.113883.19.2"/>
+				</healthCareFacility>
+			</location>
+		</encompassingEncounter>
+	</componentOf>
+
+	<!-- ********************************************************
+     CDA Body
+     ******************************************************** -->
+	<component>
+		<structuredBody>
+			<!--
+********************************************************
+REASON FOR REFERRAL
+********************************************************
+-->
+			<component>
+				<section>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.1"/>
+					<!-- ** Reason for Referral Section Template ** -->
+					<code codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" code="42349-1"
+						displayName="REASON FOR REFERRAL"/>
+					<title>REASON FOR REFERRAL</title>
+					<text>
+						<paragraph>Risk this could be a venomous snake bite ( i.e., rattlesnake),
+							seizures are expected and observation required</paragraph>
+					</text>
+				</section>
+			</component>
+			<!-- 
+************************************
+CHIEF COMPLAINT
+************************************
+ -->
+			<component>
+				<section>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.13.2.1"/>
+					<code code="10154-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+						displayName="CHIEF COMPLAINT"/>
+					<title> CHIEF COMPLAINT</title>
+					<text>Unintentional snake bite/sting at her own residence</text>
+				</section>
+			</component>
+
+			<!--
+********************************************************
+HISTORY OF PRESENT ILLNESS
+********************************************************
+-->
+			<component>
+				<section>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.4"/>
+					<code codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" code="10164-2"
+						displayName="HISTORY OF PRESENT ILLNESS"/>
+					<title>HISTORY OF PRESENT ILLNESS</title>
+					<text>
+						<list listType="unordered">
+							<item>Poisoning Substances: <list listType="ordered">
+									<item> Snake Bite (Unknown snake) <list listType="unordered">
+											<item> Quantity: 1</item>
+											<item> Route: Bite/sting</item>
+											<item> Estimated time of exposure: 20 minute(s)
+												ago</item>
+											<item> Certainty: Exact</item>
+										</list>
+									</item>
+								</list>
+							</item>
+
+							<item> Acuity: Acute</item>
+							<item>Symptoms: two puncture marks, pain, swelling.</item>
+							<item>Subjective: <list listType="unordered">
+									<item>caller's 25 y/o wife was out in the yard weeding 20
+										minutes ago in the dark, and wearing her head phones. She
+										was bitten by a snake on the knuckle of her finger. She saw
+										the snake but was unable to see what kind it might have
+										been. No therapy as yet</item>
+									<item>Patient was advised to refer to an ED for medical eval,
+										observation. Instructed to wash the site now, and proceed to
+										the ED.</item>
+								</list>
+							</item>
+						</list>
+					</text>
+				</section>
+			</component>
+			<!-- ************************************
+GENERAL STATUS
+************************************ -->
+			<component>
+				<section>
+					<templateId root="2.16.840.1.113883.10.20.2.5"/>
+					<code code="10210-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+						displayName="GENERAL STATUS"/>
+					<title>GENERAL STATUS</title>
+					<text>
+						<list listType="unordered">
+							<item>Dizziness</item>
+							<item>Headache</item>
+						</list>
+					</text>
+				</section>
+			</component>
+			<!-- 
+************************************
+ASSESSMENT
+************************************
+ -->
+			<component>
+				<section>
+					<templateId root="2.16.840.1.113883.10.20.22.2.8"/>
+					<code codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" code="51848-0"
+						displayName="ASSESSMENT"/>
+					<title>ASSESSMENT</title>
+					<text>
+						<table border="1" width="100%">
+							<thead>
+								<tr>
+									<th>Patient Specific</th>
+									<th>Substances information</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<list listType="unordered">
+											<item>There is a risk this could be a venomous snake, ( i.e. rattlesnake)</item>
+											<item>The swelling could be from the injury of the puncture, but should be observed in an ED for the rate of swelling, echymosis that could occur with rattlesnake bite.</item>
+										</list>
+									</td>
+									<td>
+										<list listType="ordered">
+											<item> Snake Bite (Unknown snake) <list
+												listType="unordered">
+												<item>Toxic dose: NA </item>
+												<item>Common effects: <list listType="unordered">
+												<item>Ecchymosis </item>
+												<item>Edema </item>
+												<item>Irritation/pain </item>
+												<item>Puncture wound/sting</item>
+												</list>
+												</item>
+												<item>Time to peak concentration: NA</item>
+												</list>
+											</item>
+										</list>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</text>
+				</section>
+			</component>
+			<!--
+********************************************************
+PLAN OF CARE
+********************************************************
+-->
+			<component>
+				<section nullFlavor="NI">
+					<templateId root="2.16.840.1.113883.10.20.22.2.10"/>
+					<!--  **** Plan of Care section template  **** -->
+					<code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+						displayName="Treatment plan"/>
+					<title>PLAN OF CARE</title>
+					<text>
+						<paragraph>Recommended diagnostic testing and monitoring:</paragraph>
+						<list listType="unordered">
+							<item> CBC, Coagulation profile, Fibrinogen, CMP</item>
+							<item> Mark the border of the edema, and monitor for increased swelling,
+								ecchymosis and/or pain </item>
+						</list>
+						<paragraph>Recommended observation time: 8 hours </paragraph>
+						<paragraph> Supportive Care:</paragraph>
+						<list listType="unordered">
+							<item> Dilute/irrigate/wash</item>
+							<item> Fab fragments: CroFab in case of rapid progress of symptoms (4-6
+								vials on start, then 4-6 vials every hour until swelling stops)
+							</item>
+						</list>
+					</text>
+				</section>
+			</component>
+
+			<!-- ************************************
+HISTORY OF PAST ILLNESS
+************************************ -->
+			<component>
+				<section nullFlavor="NI">
+					<templateId root="2.16.840.1.113883.10.20.22.2.20"/>
+					<code codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" code="11348-0"
+						displayName="HISTORY OF PAST ILLNESS" nullFlavor="NP"/>
+					<title>PAST MEDICAL HISTORY</title>
+					<text>
+						<paragraph>NA</paragraph>
+					</text>
+				</section>
+			</component>
+			<!--
+********************************************************
+MEDICATIONS
+********************************************************
+-->
+			<component>
+				<section nullFlavor="NI">
+					<templateId root="2.16.840.1.113883.10.20.22.2.1"/>
+					<code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+						displayName="HISTORY OF MEDICATION USE" nullFlavor="NP"/>
+					<title>MEDICATIONS</title>
+					<text> NA </text>
+				</section>
+			</component>
+		</structuredBody>
+	</component>
+</ClinicalDocument>
